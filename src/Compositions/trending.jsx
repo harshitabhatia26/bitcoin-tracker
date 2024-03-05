@@ -19,7 +19,7 @@ export default function TrendingList() {
   }, []);
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 427, bgcolor: 'background.paper', borderRadius: '8px' }}>
+    <Box sx={{ width: '100%', maxWidth: 427, bgcolor: 'background.paper', borderRadius: '8px'}}>
       <List component="nav" >
         <ListItemText
           primary="Trending Coins (24h)"
