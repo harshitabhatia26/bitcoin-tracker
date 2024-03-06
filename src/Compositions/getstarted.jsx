@@ -7,7 +7,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 export default function GetStarted() {
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 427, bgcolor: '#0052FE', borderRadius: '8px', marginY: 2, paddingY: 4, paddingX: 5 }}>
+        <Box sx={{ width: '100%', maxWidth: 427, bgcolor: '#0052FE', borderRadius: '8px', marginBottom: 4, paddingY: 4, paddingX: 5 }}>
             <div className='flex flex-col items-center'>
                 <Typography variant="h6" align="center" fontWeight={600} fontSize={24} color="whitesmoke" >
                     Get Started with KoinX

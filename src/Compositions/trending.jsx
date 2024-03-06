@@ -30,8 +30,8 @@ export default function TrendingList() {
           }}
         />
         {trendingCoins.map((coin, index) => (
-          <ListItemButton key={index}>
-            <Avatar alt={coin.item.name} src={coin.item.thumb} sx={{width:'24px', height:'24px', margin: 1}} />
+          <ListItemButton key={index} sx={{ '@media (max-width: 600px)': { flexDirection: 'column', alignItems: 'start' } }}>
+            <Avatar alt={coin.item.name} src={coin.item.thumb} sx={{ width: '24px', height: '24px', margin: 1, '@media (max-width: 600px)': { marginRight: 0 } }} />
             <ListItemText primary={`${coin.item.name} (${coin.item.symbol.toUpperCase()})`} />
           </ListItemButton>
         ))}
