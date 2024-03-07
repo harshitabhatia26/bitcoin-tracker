@@ -6,11 +6,14 @@ import TrendingList from './trending';
 import GetStarted from './getstarted';
 import TradingViewWidget from './tradingWidget';
 import { Divider } from '@mui/material';
+import TrendingChange from './trendingChange';
+
 
 export default function SimpleContainer() {
     const [bitcoinSymbol, setBitcoinSymbol] = useState('');
     const [bitcoinLogo, setBitcoinLogo] = useState('');
     const [bitcoinPrices, setBitcoinPrices] = useState({ usd: 0, inr: 0 });
+    const [btcPriceChange, setBtcPriceChange] = useState(null);
 
     useEffect(() => {
         fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,inr')
@@ -28,6 +31,7 @@ export default function SimpleContainer() {
             .then(data => {
                 setBitcoinSymbol(data.symbol.toUpperCase());
                 setBitcoinLogo(data.image.small);
+                setBtcPriceChange(data.market_data.price_change_percentage_24h)
             })
             .catch(error => console.error('Error fetching data: ', error));
     }, []);
@@ -35,18 +39,28 @@ export default function SimpleContainer() {
     return (
         <React.Fragment>
             <CssBaseline />
-            <Container maxWidth="100%" disableGutters='true'>
-                <Box sx={{ position: 'relative', bgcolor: '#EFF2F5', padding: 2 }}>
-                    <div className='flex flex-col md:flex-row items-center'>
+            <Container maxWidth="100%" disableGutters>
+                <Box sx={{ position: 'relative', bgcolor: '#EFF2F5', padding: 2, alignItems: 'center'}}>
+                    <div className='flex flex-col md:flex-row items-center justify-center'>
                         <div className='flex flex-row  '>
-                            <Box sx={{width: '70vw', bgcolor: 'background.paper', borderRadius: '8px', display: 'flex', flexDirection: 'column', padding: 4}}>
+                            <Box sx={{
+                                width: { xs: '90vw', md: '60vw' },
+                                height: {xs: '50vh', md: '80vh'},
+                                bgcolor: 'background.paper',
+                                borderRadius: '8px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                padding: 4,
+                                marginX: 2
+                            }}>
                                 <div className='flex flex-row items-center'>
                                     <img src={bitcoinLogo} alt="Bitcoin Logo" style={{ width: '24px', height: '24px', marginRight: '8px' }} />
                                     <h1 className='text-2xl font-semibold'>Bitcoin</h1>
-                                    <h1 className='text-l font-semibold mx-4'>BTC</h1>
+                                    <h1 className='text-l font-semibold mx-4'>{bitcoinSymbol}</h1>
                                 </div>
                                 <div className='flex flex-row items-center'>
                                     <h1 className='text-3xl font-semibold'>${bitcoinPrices.usd.toFixed(2)}</h1>
+                                    <TrendingChange id={btcPriceChange} />
                                     <h1 className='text-l font-semibold mx-4'>(24H)</h1>
                                 </div>
                                 <div className='flex flex-row items-center'>

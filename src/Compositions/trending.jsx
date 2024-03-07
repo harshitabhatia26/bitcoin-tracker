@@ -4,6 +4,7 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
+import TrendingChange from './trendingChange';
 
 export default function TrendingList() {
   const [trendingCoins, setTrendingCoins] = useState([]);
@@ -30,9 +31,12 @@ export default function TrendingList() {
           }}
         />
         {trendingCoins.map((coin, index) => (
-          <ListItemButton key={index} sx={{ '@media (max-width: 600px)': { flexDirection: 'column', alignItems: 'start' } }}>
-            <Avatar alt={coin.item.name} src={coin.item.thumb} sx={{ width: '24px', height: '24px', margin: 1, '@media (max-width: 600px)': { marginRight: 0 } }} />
-            <ListItemText primary={`${coin.item.name} (${coin.item.symbol.toUpperCase()})`} />
+          <ListItemButton key={index} >
+            <div className='flex flex-row items-center'>
+            <Avatar alt={coin.item.name} src={coin.item.thumb} sx={{ width: '24px', height: '24px',}} />
+            <ListItemText primary={`${coin.item.name} (${coin.item.symbol.toUpperCase()})`} sx={{marginX: 2}} />
+            <TrendingChange className="flex flex-row" id={coin.item.data.price_change_percentage_24h.usd} />
+            </div>
           </ListItemButton>
         ))}
       </List>
